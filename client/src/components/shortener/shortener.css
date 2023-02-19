@@ -1,0 +1,85 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    place-items: flex-start;
+    padding: 3rem 5rem;
+    width: 100%;
+    height: 100%;
+    gap: 5rem;
+    padding-top: 5rem;
+}
+
+.heading {
+    font-size: 4rem;
+    color: black;
+    width: 50%;
+    line-height: 4.3rem;
+}
+
+.input-area {
+    display: flex;
+    flex-direction: row;
+    place-items: center;
+    gap: 0.2rem;
+    width: 80%;
+}
+
+#url-type {
+    width: 70%;
+    background-color: #f1f1f1;
+    padding: 1.2rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.input-area button {
+    background-color: #000000;
+    border-radius: 0.5rem;
+    color: #ffffff;
+    padding: 1rem;
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pen-effect {
+    position: relative;
+}
+
+.pen-effect:after{
+    content:"";
+    z-index:-1;
+    left:-0.5em;
+    top:1.1em;
+    padding:0em 0.25em;
+    border-width:0.1em;
+    border-style:solid;
+    border-color:#fca311;
+    border-left-color:transparent;
+    border-top-color:transparent;
+    border-right-color: transparent;
+    position:absolute;
+    width:100%;
+    height:1em;
+    transform:rotate(180deg);
+    opacity:0.7;
+    border-top-left-radius:0%;
+    border-bottom-right-radius: 60%;
+}
+
+#btn-loader {
+    position: relative;
+    cursor: not-allowed;
+    display: flex;
+    place-items: center;
+    display: none;
+}
+
+#btn-loader icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0rem;
+}
