@@ -2,6 +2,7 @@ import express from "express"
 import mongoose from "mongoose"
 import cors from "cors"
 import "./db/conn.js"
+import URL from "./models/urls.js"
 const index = express()
 const port = process.env.PORT || 8000
 index.use(express.json());
