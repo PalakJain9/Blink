@@ -1,0 +1,16 @@
+import express from "express"
+import mongoose from "mongoose"
+import cors from "cors"
+import "./db/conn.js"
+const index = express()
+const port = process.env.PORT || 8000
+index.use(express.json());
+index.use(express.urlencoded({extended: false}));
+index.use(cors());
+
+index.get("/", (req, res) => {
+    res.status(200).send("hello")
+})
+index.listen(port, () => {
+    console.log(`server running at ${port}`)
+})
