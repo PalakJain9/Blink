@@ -12,7 +12,6 @@ const urlSchema = new mongoose.Schema({
     },
     code6char: {
         type: String,
-        required: true,
         unique: [true, "url already present"]
     }
 });

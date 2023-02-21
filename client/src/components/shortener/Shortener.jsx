@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import './shortener.css'
 import { Icon } from '@iconify/react';
+import axios from "axios"
 
 const Shortener = () => {
   const [longUrl, setLongUrl] = useState("")
   useEffect(() => {
-    setLongUrl(longUrl);
-    alert(longUrl)
+    setLongUrl(longUrl)
+    if(longUrl){
+      axios.post("http://localhost:8000/register", longUrl)
+      .then((res) => alert(res.data))
+      .catch((e) => alert(e.message))
+    }
   },[longUrl])
 
   const inputUrl = (event) => { 
