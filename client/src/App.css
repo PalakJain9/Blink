@@ -1,3 +1,20 @@
+.side-dotted {
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  z-index: -1;
+  -webkit-clip-path: polygon(70% 0, 100% 0%, 100% 100%, 86% 100%);
+  clip-path: polygon(70% 0, 100% 0%, 100% 100%, 86% 100%);
+  background-color: #f2f2fb;
+  opacity: 1;
+  background-image:  radial-gradient(#a1a1a1 1.6500000000000001px, transparent 1.6500000000000001px), radial-gradient(#a1a1a1 1.6500000000000001px, #f7f7f7 1.6500000000000001px);
+  background-size: 66px 66px;
+  background-position: 0 0,33px 33px;
+}
+
 .outer-container {
   display: flex;
   flex-direction: column;
@@ -9,17 +26,14 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: white;
-  background-color:hsla(0,0%,100%,1);
-background-image:
-radial-gradient(at 100% 100%, hsla(60,100%,87%,1) 0px, transparent 50%),
-radial-gradient(at 71% 100%, hsla(266,100%,88%,1) 0px, transparent 50%);
+  background-color: transparent;
 }
 
 #bg {
   position: fixed;
-  top: 5%;
+  top: 25%;
   right: 0;
+  z-index: 3;
 }
 
 .inner-container {
