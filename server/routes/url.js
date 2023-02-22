@@ -5,9 +5,9 @@ const urlRouter = express.Router()
 
 urlRouter.get("/shorten", async (req, res) => {
     try{
-        //const data = await URL.find();
-        res.send("hi")
-        //res.status(200).send(data);
+        const data = await URL.find();
+        res.send(data)
+        res.status(200).send(data);
     }
     catch(e){
         console.log(e);
