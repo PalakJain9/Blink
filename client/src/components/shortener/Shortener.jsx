@@ -8,7 +8,7 @@ const Shortener = () => {
   useEffect(() => {
     setLongUrl(longUrl)
     if(longUrl){
-      axios.post("http://localhost:8000/register", longUrl)
+      axios.post("http://localhost:8000/shorten", longUrl)
       .then((res) => alert(res.data))
       .catch((e) => alert(e.message))
     }
@@ -31,11 +31,11 @@ const Shortener = () => {
   return (
     <>
     <div className='container'>
-      <h2 className='heading'>A tiny URL Shortener for your next <span className='pen-effect'>big project</span></h2>
+      <h2 className='heading'>A tiny URL Shortener for your next <span className='pen-effect'>big project</span> ⚡</h2>
       <div className='input-area'>
         <input id='url-type' name='longUrl' type='text' placeholder='Enter URL here' onKeyDown={(event) => inputUrl(event)}></input>
-        <button classname='btn-black' id='btn_shorten' onClick={() => shrinkIt()}>shorten</button>
-        <button classname='btn-black' id='btn-loader'><Icon icon="eos-icons:bubble-loading" color="white" width="1.5rem" height="1.5rem" inline={true} /></button>
+        <button className='btn-black' id='btn_shorten' onClick={() => shrinkIt()}>shorten</button>
+        <button className='btn-black' id='btn-loader'><Icon icon="eos-icons:bubble-loading" color="white" width="1.5rem" height="1.5rem" inline={true} /></button>
       </div>
     </div>
     </>
