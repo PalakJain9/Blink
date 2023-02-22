@@ -6,21 +6,25 @@ const urlRouter = express.Router()
 urlRouter.get("/shorten", async (req, res) => {
     try{
         const data = await URL.find();
-        res.send(data)
         res.status(200).send(data);
     }
     catch(e){
-        console.log(e);
+        res.status(404).send(e.message)
     }
 })
 
 urlRouter.post("/shorten", async (req, res) => {
-    const longUrl = req.body;
+    const inputLongUrl = req.body.longUrl;
     try {
-        //const isPresent = await URL.find({longUrl: longUrl});
-        const newEntry = new URL(req.body);
-        const data = await newEntry.save();
-        res.status(201).send(data);
+        const isPresent = await URL.find({longUrl: inputLongUrl});
+        if(isPresent.length == 0){
+            const newEntry = new URL(req.body);
+            const data = await newEntry.save();
+            res.status(201).send(data);
+        }
+        else {
+            res.status(200).send(isPresent);
+        }
     }
     catch(e) {
         res.status(400).send(e.message);
