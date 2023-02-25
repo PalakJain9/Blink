@@ -4,7 +4,9 @@ import { Icon } from '@iconify/react';
 import axios from "axios"
 
 const Shortener = () => {
-  const [longUrl, setLongUrl] = useState("")
+  const [longUrl, setLongUrl] = useState({
+    url: ""
+  })
 
   const btnLoaderDisplay = (btnLoad) => {
     if(btnLoad){
@@ -21,15 +23,16 @@ const Shortener = () => {
 
   useEffect(() => {
     setLongUrl(longUrl)
-    if(longUrl){
+    console.log(longUrl)
+    if(longUrl.url){
       btnLoaderDisplay(true)
       axios.post("http://localhost:8000/shorten", longUrl)
       .then((res) => {
-        alert(res.data)
+        console.log(res.data)
         btnLoaderDisplay(false);
       })
       .catch((e) => {
-        alert(e.message)
+        console.log(e.response.data)
         btnLoaderDisplay(false);
       })
     }
@@ -38,7 +41,7 @@ const Shortener = () => {
   const inputUrl = (event) => { 
     //if enter pressed
     if(event.keyCode == 13) { 
-      setLongUrl(event.target.value);
+      setLongUrl({url: event.target.value});
       event.preventDefault();
     }
     //else take long url at time of btn click
@@ -46,7 +49,7 @@ const Shortener = () => {
 
   const shrinkIt = () => {
     const inputarea = document.getElementById("url-type")
-    setLongUrl(inputarea.value)
+    setLongUrl({url: inputarea.value})
   }
 
   return (

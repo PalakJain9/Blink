@@ -3,7 +3,7 @@ import isUrl from "is-url"
 import shortid from "shortid"
 
 const urlSchema = new mongoose.Schema({
-    longUrl: {
+    url: {
         type: String,
         required: true,
         unique: [true, "url already present"],

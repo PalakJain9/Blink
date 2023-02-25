@@ -15,9 +15,10 @@ urlRouter.get("/shorten", async (req, res) => {
 })
 
 urlRouter.post("/shorten", async (req, res) => {
-    const inputLongUrl = req.body.longUrl;
+    const inputLongUrl = req.body.url;
+    console.log(inputLongUrl)
     try {
-        const isPresent = await URL.find({longUrl: inputLongUrl});
+        const isPresent = await URL.find({url: inputLongUrl});
         if(isPresent.length == 0){ 
             const newEntry = await new URL(req.body);
             const data = await newEntry.save();
