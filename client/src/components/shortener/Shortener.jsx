@@ -5,9 +5,24 @@ import axios from "axios"
 
 const Shortener = () => {
   const [longUrl, setLongUrl] = useState("")
+
+  const btnLoaderDisplay = (btnLoad) => {
+    if(btnLoad){
+      //display loader button
+      document.getElementById('btn_shorten').style.display = 'none';
+      document.getElementById('btn-loader').style.display = 'flex';
+    }
+    else {
+      //display shorten button
+      document.getElementById('btn_shorten').style.display = 'flex';
+      document.getElementById('btn-loader').style.display = 'none';
+    }
+  }
+
   useEffect(() => {
     setLongUrl(longUrl)
     if(longUrl){
+      btnLoaderDisplay(true)
       axios.post("http://localhost:8000/shorten", longUrl)
       .then((res) => alert(res.data))
       .catch((e) => alert(e.message))
