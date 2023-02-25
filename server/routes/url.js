@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
-import express from "express"
+import express, { json } from "express"
 import URL from "../models/urls.js";
+
 const urlRouter = express.Router()
 
 urlRouter.get("/shorten", async (req, res) => {
@@ -17,8 +18,8 @@ urlRouter.post("/shorten", async (req, res) => {
     const inputLongUrl = req.body.longUrl;
     try {
         const isPresent = await URL.find({longUrl: inputLongUrl});
-        if(isPresent.length == 0){
-            const newEntry = new URL(req.body);
+        if(isPresent.length == 0){ 
+            const newEntry = await new URL(req.body);
             const data = await newEntry.save();
             res.status(201).send(data);
         }

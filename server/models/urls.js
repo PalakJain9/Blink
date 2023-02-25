@@ -1,7 +1,6 @@
 import mongoose from "mongoose"
-import validator from "validator"
-import express from "express"
 import isUrl from "is-url"
+import shortid from "shortid"
 
 const urlSchema = new mongoose.Schema({
     longUrl: {
@@ -14,8 +13,11 @@ const urlSchema = new mongoose.Schema({
             }
         }
     },
-    code6char: {
-        type: String
+    shortCode: {
+        type: String,
+        required: true,
+        unique: true,
+        default: shortid.generate()
     }
 });
 
