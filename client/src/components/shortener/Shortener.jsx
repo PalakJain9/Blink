@@ -24,8 +24,14 @@ const Shortener = () => {
     if(longUrl){
       btnLoaderDisplay(true)
       axios.post("http://localhost:8000/shorten", longUrl)
-      .then((res) => alert(res.data))
-      .catch((e) => alert(e.message))
+      .then((res) => {
+        alert(res.data)
+        btnLoaderDisplay(false);
+      })
+      .catch((e) => {
+        alert(e.message)
+        btnLoaderDisplay(false);
+      })
     }
   },[longUrl])
 
