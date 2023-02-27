@@ -44,8 +44,9 @@ const Shortener = () => {
       .then((res) => {
         setShortenUrlData(res.data[0])
         btnLoaderDisplay(false);
-        const outputArea = document.getElementById("outputArea");
         disableInputArea(true)
+        document.getElementById("btn-copy").style.display = 'inline-block'
+        const outputArea = document.getElementById("outputArea");
         outputArea.style.display = 'flex'
         outputArea.value = `${domain}/${shortenUrlData.shortCode}`
       })
@@ -70,6 +71,12 @@ const Shortener = () => {
     setLongUrl({url: inputarea.value})
   }
 
+  const CopyToClipboard = async() => {
+    const text = document.getElementById("outputArea").value
+    await navigator.clipboard.writeText(text)
+    window.alert("copied to clipboard")
+  }
+
   return (
     <>
     <div className='container'>
@@ -82,6 +89,7 @@ const Shortener = () => {
         </div>
         <div className='output-area'>
           <input className='url-type' id='outputArea' type='text' disabled></input>
+          <button id='btn-copy' onClick={() => CopyToClipboard()}>copy</button>
         </div>
       </div>
     </div>

@@ -42,7 +42,7 @@
     font-size: 1.1rem;
 }
 
-.input-area button {
+.input-area button, .output-area button {
     background-color: #000000;
     border-radius: 0.5rem;
     color: #ffffff;
@@ -95,9 +95,17 @@
 
 .output-area {
     width: 100%;
+    display: flex;
+    flex-direction: row;
+    place-items: flex-start;
 }
 
 .output-area input {
     display: none;
     width: 31%;
+}
+
+#btn-copy {
+    display: none;
+    width: 11%;
 }
