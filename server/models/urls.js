@@ -1,6 +1,6 @@
 import mongoose from "mongoose"
 import isUrl from "is-url"
-import shortid from "shortid"
+import { nanoid } from "nanoid"
 
 const urlSchema = new mongoose.Schema({
     url: {
@@ -17,7 +17,7 @@ const urlSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        default: shortid.generate()
+        default: () => nanoid(6)
     }
 });
 
