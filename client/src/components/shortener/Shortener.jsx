@@ -23,6 +23,13 @@ const Shortener = () => {
     }
   }
 
+  const disableInputArea = (val) => {
+    if(val){
+      document.getElementById("btn_shorten").style.display = 'none'
+      document.getElementById("url-type").disabled = 'true'
+    }
+  }
+
   useEffect(() => {
     setShortenUrlData(shortenUrlData)
     console.log(shortenUrlData)
@@ -38,6 +45,7 @@ const Shortener = () => {
         setShortenUrlData(res.data[0])
         btnLoaderDisplay(false);
         const outputArea = document.getElementById("outputArea");
+        disableInputArea(true)
         outputArea.style.display = 'flex'
         outputArea.value = `${domain}/${shortenUrlData.shortCode}`
       })
