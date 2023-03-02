@@ -8,7 +8,8 @@ const Shortener = () => {
     url: ""
   })
   const [shortenUrlData, setShortenUrlData] = useState({})
-  const domain = `b.link`
+  const [shortCode, setShortCode] = useState("");
+  const domain = `b.link/`
 
   const btnLoaderDisplay = (btnLoad) => {
     if(btnLoad){
@@ -25,15 +26,26 @@ const Shortener = () => {
 
   const disableInputArea = (val) => {
     if(val){
+      document.getElementById("outputArea").style.display = 'flex'
       document.getElementById("btn_shorten").style.display = 'none'
-      document.getElementById("url-type").disabled = 'true'
+      document.getElementById("url-type").setAttribute('disabled','disabled');
+    }
+    else {
+      document.getElementById("outputArea").style.display = 'none'
+      document.getElementById("btn_shorten").style.display = 'inline-block'
+      document.getElementById("url-type").removeAttribute('disabled')
+      document.getElementById("url-type").value=''
     }
   }
 
   useEffect(() => {
     setShortenUrlData(shortenUrlData)
-    console.log(shortenUrlData)
   },[shortenUrlData])
+
+  useEffect(() => {
+    setShortCode(shortCode)
+    document.getElementById("output").value = `${domain}${shortCode}`
+  },[shortCode])
 
   useEffect(() => {
     setLongUrl(longUrl)
@@ -43,12 +55,9 @@ const Shortener = () => {
       axios.post("http://localhost:8000/shorten", longUrl)
       .then((res) => {
         setShortenUrlData(res.data[0])
+        setShortCode(res.data[0].shortCode)
         btnLoaderDisplay(false);
         disableInputArea(true)
-        document.getElementById("btn-copy").style.display = 'inline-block'
-        const outputArea = document.getElementById("outputArea");
-        outputArea.style.display = 'flex'
-        outputArea.value = `${domain}/${shortenUrlData.shortCode}`
       })
       .catch((e) => {
         console.log(e.response.data)
@@ -72,7 +81,7 @@ const Shortener = () => {
   }
 
   const CopyToClipboard = async() => {
-    const text = document.getElementById("outputArea").value
+    const text = document.getElementById("output").value
     await navigator.clipboard.writeText(text)
     window.alert("copied to clipboard")
   }
@@ -83,13 +92,15 @@ const Shortener = () => {
       <h2 className='heading'>A tiny URL Shortener for your next <span className='pen-effect'>big project</span> ⚡</h2>
       <div className='main-function'>
         <div className='input-area'>
-          <input id='url-type' className='url-type' name='longUrl' type='text' placeholder='Enter URL here' onKeyDown={(event) => inputUrl(event)}></input>
+          <input id='url-type' className='url-type' name='longUrl' type='text' placeholder='Enter URL here' onKeyDown={(event) => inputUrl(event)} required></input>
           <button className='btn-black' id='btn_shorten' onClick={() => shrinkIt()}>shorten</button>
           <button className='btn-black' id='btn-loader'><Icon icon="eos-icons:bubble-loading" color="white" width="1.5rem" height="1.5rem" inline={true} /></button>
         </div>
-        <div className='output-area'>
-          <input className='url-type' id='outputArea' type='text' disabled></input>
+        <div className='output-area' id='outputArea'>
+          <input className='url-type' id='output' name='shortUrl' type='text' disabled></input>
+          {/* input field is disabled by default */}
           <button id='btn-copy' onClick={() => CopyToClipboard()}>copy</button>
+          <button id='btn-shorten2' onClick={() => disableInputArea(false)}>shorten another url</button>
         </div>
       </div>
     </div>
