@@ -4,10 +4,11 @@ import URL from "../models/urls.js";
 
 const urlRouter = express.Router()
 
-urlRouter.get("/shorten", async (req, res) => {
+urlRouter.get("/shorten/:shortCode", async (req, res) => {
+    const code = req.params.shortCode;
     try{
-        const data = await URL.find();
-        res.status(200).send(data);
+        const data = await URL.find({shortCode: code});
+        res.status(200).send(data[0].url);
     }
     catch(e){
         res.status(404).send(e.message)
