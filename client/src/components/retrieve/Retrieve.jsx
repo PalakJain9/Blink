@@ -11,11 +11,13 @@ const Retrieve = () => {
   useEffect(() => {
     setRetrieveUrl(retrieveUrl)
     console.log(retrieveUrl)
-    window.location.href=`${retrieveUrl}`
   },[retrieveUrl])
 
     axios.get(`http://localhost:8000/shorten/${param.shortCode}`)
-    .then((res) => setRetrieveUrl(res.data))
+    .then((res) => {
+      setRetrieveUrl(res.data)
+      window.location.href=retrieveUrl
+    })
     .catch((e) => console.log(e.message))
     //api call
     //until result found => display container
