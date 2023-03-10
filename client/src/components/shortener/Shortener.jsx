@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './shortener.css'
 import { Icon } from '@iconify/react';
 import axios from "axios"
+import CustomLink from '../customLink/CustomLink.jsx';
 
 const Shortener = () => {
   const [longUrl, setLongUrl] = useState({
@@ -94,13 +95,14 @@ const Shortener = () => {
         <div className='input-area'>
           <input id='url-type' className='url-type' name='longUrl' type='text' placeholder='Enter URL here' onKeyDown={(event) => inputUrl(event)} required></input>
           <button className='btn-black' id='btn_shorten' onClick={() => shrinkIt()}>shorten</button>
-          <button className='btn-black' id='btn-loader'><Icon icon="eos-icons:bubble-loading" color="white" width="1.5rem" height="1.5rem" inline={true} /></button>
+          <button className='btn-black' id='btn-loader'><Icon icon="eos-icons:bubble-loading" color="white" width="1.3rem" height="1.3rem" inline={true} /></button>
         </div>
         <div className='output-area' id='outputArea'>
           <input className='url-type' id='output' name='shortUrl' type='text' disabled></input>
           {/* input field is disabled by default */}
-          <button id='btn-copy' onClick={() => CopyToClipboard()}>copy</button>
-          <button id='btn-shorten2' onClick={() => disableInputArea(false)}>shorten another url</button>
+          <button id='btn-copy' className='btn-black' onClick={() => CopyToClipboard()} title='copy'><Icon icon="material-symbols:content-copy-outline" width="1.3rem" height="1.3rem" inline={true} /></button>
+          <CustomLink />
+          <button id='btn-shorten2' className='btn-black' onClick={() => disableInputArea(false)}>shorten another url</button>
         </div>
       </div>
     </div>

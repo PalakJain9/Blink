@@ -19,9 +19,6 @@ const Retrieve = () => {
       window.location.href=retrieveUrl
     })
     .catch((e) => console.log(e.message))
-    //api call
-    //until result found => display container
-    //when result found => move to longUrl page
   return (
     <>
         <div className='retreive-container' id='retreive-container'>

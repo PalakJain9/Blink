@@ -53,6 +53,10 @@
     align-items: center;
 }
 
+.btn-black {
+    height: 100%;
+}
+
 .pen-effect {
     position: relative;
 }
@@ -107,7 +111,7 @@
 }
 
 #btn-copy {
-    width: 11%;
+    width: 5%;
 }
 
 #btn-shorten2 {
