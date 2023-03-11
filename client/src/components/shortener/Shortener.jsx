@@ -3,14 +3,16 @@ import './shortener.css'
 import { Icon } from '@iconify/react';
 import axios from "axios"
 import CustomLink from '../customLink/CustomLink.jsx';
+import { useNavigate } from 'react-router-dom';
 
-const Shortener = () => {
+const Shortener = ({setIsCustom}) => {
   const [longUrl, setLongUrl] = useState({
     url: ""
   })
   const [shortenUrlData, setShortenUrlData] = useState({})
   const [shortCode, setShortCode] = useState("");
   const domain = `b.link/`
+  const navigate = useNavigate();
 
   const btnLoaderDisplay = (btnLoad) => {
     if(btnLoad){
@@ -101,7 +103,7 @@ const Shortener = () => {
           <input className='url-type' id='output' name='shortUrl' type='text' disabled></input>
           {/* input field is disabled by default */}
           <button id='btn-copy' className='btn-black' onClick={() => CopyToClipboard()} title='copy'><Icon icon="material-symbols:content-copy-outline" width="1.3rem" height="1.3rem" inline={true} /></button>
-          <CustomLink />
+          <button className='btn-black' id='btn-customise' onClick={() => setIsCustom(true)} title='customise'><Icon icon="system-uicons:write" width="1.3rem" height="1.3rem" inline={true} /></button>
           <button id='btn-shorten2' className='btn-black' onClick={() => disableInputArea(false)}>shorten another url</button>
         </div>
       </div>

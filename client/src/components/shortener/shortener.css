@@ -108,9 +108,10 @@
 
 .output-area input {
     width: 31%;
+    height: max-content;
 }
 
-#btn-copy {
+#btn-copy, #btn-customise {
     width: 5%;
 }
 

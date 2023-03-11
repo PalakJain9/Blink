@@ -5,7 +5,13 @@ import './customLink.css'
 const CustomLink = () => {
   return (
     <>
-        <button className='btn-black' id='btn-customise' title='customise'><Icon icon="system-uicons:write" width="1.3rem" height="1.3rem" inline={true} /></button>
+      <div className='custom-container'>
+        <div className='customise-area'>
+          <p>b.link/</p>
+          <input className='url-type' type='text' placeholder='Enter code here'></input>
+          <button>generate</button>
+        </div>
+      </div>
     </>
   )
 }
