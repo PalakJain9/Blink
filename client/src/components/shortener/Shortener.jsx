@@ -5,7 +5,7 @@ import axios from "axios"
 import CustomLink from '../customLink/CustomLink.jsx';
 import { useNavigate } from 'react-router-dom';
 
-const Shortener = ({setIsCustom}) => {
+const Shortener = ({setIsCustom, isCustom}) => {
   const [longUrl, setLongUrl] = useState({
     url: ""
   })
@@ -93,6 +93,7 @@ const Shortener = ({setIsCustom}) => {
     <>
     <div className='container'>
       <h2 className='heading'>A tiny URL Shortener for your next <span className='pen-effect'>big project</span> ⚡</h2>
+      { isCustom == false && 
       <div className='main-function'>
         <div className='input-area'>
           <input id='url-type' className='url-type' name='longUrl' type='text' placeholder='Enter URL here' onKeyDown={(event) => inputUrl(event)} required></input>
@@ -107,6 +108,7 @@ const Shortener = ({setIsCustom}) => {
           <button id='btn-shorten2' className='btn-black' onClick={() => disableInputArea(false)}>shorten another url</button>
         </div>
       </div>
+      }
     </div>
     </>
   )

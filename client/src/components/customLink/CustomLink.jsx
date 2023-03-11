@@ -9,7 +9,7 @@ const CustomLink = () => {
         <div className='customise-area'>
           <p>b.link/</p>
           <input className='url-type' type='text' placeholder='Enter code here'></input>
-          <button>generate</button>
+          <button className='btn-black'>generate</button>
         </div>
       </div>
     </>
