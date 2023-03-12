@@ -32,7 +32,7 @@ function App() {
       </svg>
       <div className='inner-container'>
         <Shortener setIsCustom={setIsCustom} isCustom={isCustom} />
-        { isCustom && <CustomLink setIsCustom={setIsCustom} isCustom={isCustom} /> }
+        { isCustom && <CustomLink setIsCustom={setIsCustom} /> }
       </div>
     </div>
     </>

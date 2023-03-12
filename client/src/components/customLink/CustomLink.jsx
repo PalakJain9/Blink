@@ -1,8 +1,7 @@
 import React from 'react'
-import { Icon } from '@iconify/react';
 import './customLink.css'
 
-const CustomLink = () => {
+const CustomLink = ({setIsCustom}) => {
   return (
     <>
       <div className='custom-container'>
@@ -10,6 +9,7 @@ const CustomLink = () => {
           <p>b.link/</p>
           <input className='url-type' type='text' placeholder='Enter code here'></input>
           <button className='btn-black'>generate</button>
+          <button className='btn-black' onClick={() => setIsCustom(false)}>go back</button>
         </div>
       </div>
     </>

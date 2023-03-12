@@ -10,7 +10,19 @@
 
 .customise-area {
     gap: 0.2rem;
-    width: 51%;
+    width: 41%;
     height: auto;
     padding: 0rem;
+}
+
+.customise-area input {
+    width: 51%;
+}
+
+.customise-area p {
+    font-size: 1.1rem;
+}
+
+.customise-area button {
+    width: auto;
 }
