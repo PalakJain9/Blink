@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import './shortener.css'
 import { Icon } from '@iconify/react';
 import axios from "axios"
-import CustomLink from '../customLink/CustomLink.jsx';
 import { useNavigate } from 'react-router-dom';
+import { inputUrl, shrinkIt } from '../../handler/inputTextHandler.js'
 
 const Shortener = ({setIsCustom, isCustom}) => {
   const [longUrl, setLongUrl] = useState({
@@ -47,7 +47,7 @@ const Shortener = ({setIsCustom, isCustom}) => {
 
   useEffect(() => {
     setShortCode(shortCode)
-    document.getElementById("output").value = `${domain}${shortCode}`
+    window.document.getElementById("output").value = `${domain}${shortCode}`
   },[shortCode])
 
   useEffect(() => {
@@ -63,25 +63,11 @@ const Shortener = ({setIsCustom, isCustom}) => {
         disableInputArea(true)
       })
       .catch((e) => {
-        console.log(e.response.data)
+        console.log(e.message)
         btnLoaderDisplay(false);
       })
     }
   },[longUrl])
-
-  const inputUrl = (event) => { 
-    //if enter pressed
-    if(event.keyCode == 13) { 
-      setLongUrl({url: event.target.value});
-      event.preventDefault();
-    }
-    //else take long url at time of btn click
-  }
-
-  const shrinkIt = () => {
-    const inputarea = document.getElementById("url-type")
-    setLongUrl({url: inputarea.value})
-  }
 
   const CopyToClipboard = async() => {
     const text = document.getElementById("output").value
@@ -96,8 +82,8 @@ const Shortener = ({setIsCustom, isCustom}) => {
       { isCustom == false && 
       <div className='main-function'>
         <div className='input-area'>
-          <input id='url-type' className='url-type' name='longUrl' type='text' placeholder='Enter URL here' onKeyDown={(event) => inputUrl(event)} required></input>
-          <button className='btn-black' id='btn_shorten' onClick={() => shrinkIt()}>shorten</button>
+          <input id='url-type' className='url-type' name='longUrl' type='text' placeholder='Enter URL here' onKeyDown={(event) => inputUrl(setLongUrl, event)} required></input>
+          <button className='btn-black' id='btn_shorten' onClick={() => shrinkIt(setLongUrl, "url-type")}>shorten</button>
           <button className='btn-black' id='btn-loader'><Icon icon="eos-icons:bubble-loading" color="white" width="1.3rem" height="1.3rem" inline={true} /></button>
         </div>
         <div className='output-area' id='outputArea'>
