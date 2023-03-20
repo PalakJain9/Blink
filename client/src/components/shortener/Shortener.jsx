@@ -1,76 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import './shortener.css'
 import { Icon } from '@iconify/react';
-import axios from "axios"
 import { useNavigate } from 'react-router-dom';
-import { inputUrl, shrinkIt } from '../../handler/inputTextHandler.js'
+import { inputUrl, shrinkIt, disableInputArea } from '../../handler/inputTextHandler.js'
 
-const Shortener = ({setIsCustom, isCustom}) => {
-  const [longUrl, setLongUrl] = useState({
-    url: ""
-  })
-  const [shortenUrlData, setShortenUrlData] = useState({})
-  const [shortCode, setShortCode] = useState("");
-  const domain = `b.link/`
-  const navigate = useNavigate();
-
-  const btnLoaderDisplay = (btnLoad) => {
-    if(btnLoad){
-      //display loader button
-      document.getElementById('btn_shorten').style.display = 'none';
-      document.getElementById('btn-loader').style.display = 'flex';
-    }
-    else {
-      //display shorten button
-      document.getElementById('btn_shorten').style.display = 'flex';
-      document.getElementById('btn-loader').style.display = 'none';
-    }
-  }
-
-  const disableInputArea = (val) => {
-    if(val){
-      document.getElementById("outputArea").style.display = 'flex'
-      document.getElementById("btn_shorten").style.display = 'none'
-      document.getElementById("url-type").setAttribute('disabled','disabled');
-    }
-    else {
-      document.getElementById("outputArea").style.display = 'none'
-      document.getElementById("btn_shorten").style.display = 'inline-block'
-      document.getElementById("url-type").removeAttribute('disabled')
-      document.getElementById("url-type").value=''
-    }
-  }
-
-  useEffect(() => {
-    setShortCode(shortCode)
-    document.getElementById("output").value = `${domain}${shortCode}`
-    console.log(shortCode)
-  },[shortCode])
-
-  useEffect(() => {
-    setShortenUrlData(shortenUrlData)
-    setShortCode(shortenUrlData.shortCode)
-    if(shortenUrlData.shortCode) document.getElementById("output").value = `${domain}${shortenUrlData.shortCode}`
-  },[shortenUrlData])
-
-  useEffect(() => {
-    setLongUrl(longUrl)
-    console.log(longUrl)
-    if(longUrl.url){
-      btnLoaderDisplay(true)
-      axios.post("http://localhost:8000/shorten", longUrl)
-      .then((res) => {
-        setShortenUrlData(res.data[0])
-        btnLoaderDisplay(false);
-        disableInputArea(true)
-      })
-      .catch((e) => {
-        console.log(e.message)
-        btnLoaderDisplay(false);
-      })
-    }
-  },[longUrl])
-
+const Shortener = ({setIsCustom, isCustom, setLongUrl}) => {
   const CopyToClipboard = async() => {
     const text = document.getElementById("output").value
     await navigator.clipboard.writeText(text)
