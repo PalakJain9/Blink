@@ -42,13 +42,16 @@ const Shortener = ({setIsCustom, isCustom}) => {
   }
 
   useEffect(() => {
-    setShortenUrlData(shortenUrlData)
-  },[shortenUrlData])
+    setShortCode(shortCode)
+    document.getElementById("output").value = `${domain}${shortCode}`
+    console.log(shortCode)
+  },[shortCode])
 
   useEffect(() => {
-    setShortCode(shortCode)
-    window.document.getElementById("output").value = `${domain}${shortCode}`
-  },[shortCode])
+    setShortenUrlData(shortenUrlData)
+    setShortCode(shortenUrlData.shortCode)
+    if(shortenUrlData.shortCode) document.getElementById("output").value = `${domain}${shortenUrlData.shortCode}`
+  },[shortenUrlData])
 
   useEffect(() => {
     setLongUrl(longUrl)
@@ -58,7 +61,6 @@ const Shortener = ({setIsCustom, isCustom}) => {
       axios.post("http://localhost:8000/shorten", longUrl)
       .then((res) => {
         setShortenUrlData(res.data[0])
-        setShortCode(res.data[0].shortCode)
         btnLoaderDisplay(false);
         disableInputArea(true)
       })

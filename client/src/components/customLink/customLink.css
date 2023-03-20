@@ -25,4 +25,5 @@
 
 .customise-area button {
     width: auto;
+    max-width: 15rem;
 }
