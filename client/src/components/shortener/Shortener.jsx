@@ -4,7 +4,7 @@ import { Icon } from '@iconify/react';
 import { useNavigate } from 'react-router-dom';
 import { inputUrl, shrinkIt, disableInputArea } from '../../handler/inputTextHandler.js'
 
-const Shortener = ({setIsCustom, isCustom, setLongUrl}) => {
+const Shortener = ({setIsCustom, isCustom, setLongUrl, shortCode, setShortenUrlData}) => {
   const CopyToClipboard = async() => {
     const text = document.getElementById("output").value
     await navigator.clipboard.writeText(text)

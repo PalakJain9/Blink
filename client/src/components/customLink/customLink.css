@@ -10,7 +10,7 @@
 
 .customise-area {
     gap: 0.2rem;
-    width: 41%;
+    width: 47%;
     height: auto;
     padding: 0rem;
 }
@@ -23,7 +23,10 @@
     font-size: 1.1rem;
 }
 
-.customise-area button {
+.customise-area .btn-black {
     width: auto;
-    max-width: 15rem;
+}
+
+#btn-loader-2 {
+    display: none;
 }
