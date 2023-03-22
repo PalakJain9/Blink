@@ -28,7 +28,7 @@ function App() {
 
   useEffect(() => {
     setShortCode(shortCode)
-    document.getElementById("output").value = `${domain}${shortCode}`
+    if(shortCode) document.getElementById("output").value = `${domain}${shortCode}`
     console.log(shortCode)
   },[shortCode])
 
@@ -80,7 +80,7 @@ function App() {
       </svg>
       <div className='inner-container'>
         <Shortener setIsCustom={setIsCustom} isCustom={isCustom} setLongUrl={setLongUrl} shortCode={shortCode} setShortenUrlData={setShortenUrlData} />
-        { isCustom && <CustomLink setIsCustom={setIsCustom} setLongUrl={setLongUrl} setShortCode={setShortCode} setShortenUrlData={setShortenUrlData} /> }
+        { isCustom && <CustomLink setIsCustom={setIsCustom} setLongUrl={setLongUrl} longUrl={longUrl} setShortCode={setShortCode} setShortenUrlData={setShortenUrlData} shortenUrlData={shortenUrlData} /> }
       </div>
     </div>
     </>

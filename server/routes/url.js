@@ -32,4 +32,14 @@ urlRouter.post("/shorten", async (req, res) => {
         res.status(400).send(e.message);
     }
 })
+
+urlRouter.patch("/shorten/:id", async(req, res) => {
+    try {
+        const _id = req.params.id;
+        const newVal = req.body;
+        const data = await Placement.updateOne({_id: _id}, {$set: newVal});
+        res.send("updated successfully");
+    }
+    catch(e) {res.status(500).send(e.message)}
+});
 export default urlRouter

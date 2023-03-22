@@ -1,7 +1,8 @@
 export const inputUrl = (useStateFunc, event) => { 
     //if enter pressed
     if(event.keyCode == 13) { 
-      useStateFunc({url: event.target.value});
+      if(event.target.name == "longUrl") useStateFunc({url: event.target.value});
+      else if(event.target.name == "customUrl") useStateFunc(event.target.value);
       event.preventDefault();
     }
     //else take text from shrinkIt function
@@ -9,7 +10,8 @@ export const inputUrl = (useStateFunc, event) => {
 
 export const shrinkIt = (useStateFunc, idVal) => {
     const inputarea = window.document.getElementById(idVal)
-    useStateFunc({url: inputarea.value})
+    if(idVal == "url-type") useStateFunc({url: inputarea.value})
+    else if(idVal == "url-custom") useStateFunc(inputarea.value);
 }
 
 export const disableInputArea = (val) => {
