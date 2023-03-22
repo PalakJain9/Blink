@@ -7,28 +7,31 @@ import axios from 'axios';
 
 const CustomLink = ({setIsCustom, setLongUrl, longUrl, setShortCode, setShortenUrlData, shortenUrlData}) => {
   const [customCode, setCustomCode] = useState("")
+  
   useEffect(() => {
     setCustomCode(customCode)
     console.log(customCode)
-  },[customCode])
+    let updatedObj = shortenUrlData
+    updatedObj.shortCode = customCode
+    console.log(updatedObj)
+    if(customCode){
+      btnLoaderDisplay(true, "btn-shorten-2")
+      axios.patch(`http://localhost:8000/shorten/${shortenUrlData._id}`, updatedObj)
+      .then((res) => {
+        console.log(res.data)
+        //setShortenUrlData(res.data[0])
+        btnLoaderDisplay(false, "btn-shorten-2");
+        // disableInputArea(true)
 
-  const customiseLink = () => {
-    //setCustomCode()
-    btnLoaderDisplay(true, "btn-shorten-2")
-    let obj = shortenUrlData
-    obj.shortCode = ``
-    // axios.patch(`http://localhost:8000/shorten/${shortenUrlData._id}`, )
-    // .then((res) => {
-    //   console.log(res.data)
-    //   //setShortenUrlData(res.data[0])
-    //   btnLoaderDisplay(false, "btn-shorten-2");
-    //   disableInputArea(true)
-    // })
-    // .catch((e) => {
-    //   console.log(e.message)
-    //   btnLoaderDisplay(false, "btn-shorten-2");
-    // })
-  }
+        // setShortenUrlData(res.data[0])
+        // setShortCode(res.data[0].shortCode)
+      })
+      .catch((e) => {
+        console.log(e.message)
+        btnLoaderDisplay(false, "btn-shorten-2");
+      })
+    }
+  },[customCode])
 
   return (
     <>
