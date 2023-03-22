@@ -18,7 +18,7 @@ const CustomLink = ({setIsCustom, setLongUrl, longUrl, setShortCode, setShortenU
       btnLoaderDisplay(true, "btn-shorten-2")
       axios.patch(`http://localhost:8000/shorten/${shortenUrlData._id}`, updatedObj)
       .then((res) => {
-        console.log(res.data)
+        window.alert(res.data)
         //setShortenUrlData(res.data[0])
         btnLoaderDisplay(false, "btn-shorten-2");
         // disableInputArea(true)
