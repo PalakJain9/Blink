@@ -37,8 +37,8 @@ urlRouter.patch("/shorten/:id", async(req, res) => {
     try {
         const _id = req.params.id;
         const newVal = req.body;
-        const isCodePresent = await URL.find({shortCode: newVal.shortCode});
-        if(isCodePresent) {
+        const isCodePresent = await URL.find({shortCode: newVal.shortCode}); //returns an array
+        if(isCodePresent.length > 0) {
             res.status(200).send("code already taken. Please enter another code");
         } else {
             const data = await URL.updateOne({_id: _id}, {$set: newVal});
