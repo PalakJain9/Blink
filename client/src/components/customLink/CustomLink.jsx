@@ -4,6 +4,7 @@ import { Icon } from '@iconify/react';
 import { inputUrl, shrinkIt } from '../../handler/inputTextHandler.js'
 import { btnLoaderDisplay } from '../../handler/buttonDisplay.js';
 import axios from 'axios';
+import Output from '../output/Output';
 
 const CustomLink = ({setIsCustom, setLongUrl, longUrl, setShortCode, setShortenUrlData, shortenUrlData}) => {
   const [customCode, setCustomCode] = useState("")
@@ -27,7 +28,7 @@ const CustomLink = ({setIsCustom, setLongUrl, longUrl, setShortCode, setShortenU
       })
       .catch((e) => {
         console.log(e.message)
-        btnLoaderDisplay(false, "btn-shorten-2");
+        btnLoaderDisplay(false, "btn-shorten-2")
       })
     }
   },[customCode])
@@ -42,6 +43,7 @@ const CustomLink = ({setIsCustom, setLongUrl, longUrl, setShortCode, setShortenU
           <button className='btn-black' id='btn-loader-2'><Icon icon="eos-icons:bubble-loading" color="white" width="1.3rem" height="1.3rem" inline={true} /></button>
           <button className='btn-black' onClick={() => setIsCustom(false)}>back</button>
         </div>
+        <Output />
       </div>
     </>
   )

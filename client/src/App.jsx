@@ -28,7 +28,7 @@ function App() {
 
   useEffect(() => {
     setShortCode(shortCode)
-    if(shortCode) document.getElementById("output").value = `${domain}${shortCode}`
+    if(shortCode) window.document.getElementById("output").value = `${domain}${shortCode}`
     console.log(shortCode)
   },[shortCode])
 
@@ -36,7 +36,7 @@ function App() {
     setShortenUrlData(shortenUrlData)
     console.log(shortenUrlData)
     //setShortCode(shortenUrlData.shortCode)
-    if(shortenUrlData) document.getElementById("output").value = `${domain}${shortenUrlData.shortCode}`
+    if(shortenUrlData) window.document.getElementById("output").value = `${domain}${shortenUrlData.shortCode}`
   },[shortenUrlData])
 
   useEffect(() => {
