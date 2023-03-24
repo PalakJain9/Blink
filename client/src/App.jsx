@@ -1,9 +1,63 @@
-import { useState } from 'react'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
 import './App.css'
+import CustomLink from './components/customLink/CustomLink.jsx'
 import Navbar from './components/navbar/Navbar.jsx'
 import Shortener from './components/shortener/Shortener.jsx'
+import { btnLoaderDisplay } from './handler/buttonDisplay.js'
+import { disableInputArea } from './handler/inputTextHandler.js'
 
 function App() {
+  const [isCustom, setIsCustom] = useState(false)
+  const [longUrl, setLongUrl] = useState({
+    url: ""
+  })
+  const [shortenUrlData, setShortenUrlData] = useState({shortCode: ""})
+  const [shortCode, setShortCode] = useState("");
+  const [btnName, setBtnName] = useState("btn_shorten") 
+  /*to keep track of which shorten button is active currently. Comes in handy to identify between customised one or normal one, so that loader can be displayed accordingly*/
+  const domain = `b.link/`
+
+  useEffect(() => {
+    setIsCustom(isCustom)
+  },[isCustom])
+
+  useEffect(() => {
+    setBtnName(btnName)
+  }, [btnName])
+
+  useEffect(() => {
+    setShortCode(shortCode)
+    if(shortCode) window.document.getElementById("output").value = `${domain}${shortCode}`
+    console.log(shortCode)
+  },[shortCode])
+
+  useEffect(() => {
+    setShortenUrlData(shortenUrlData)
+    console.log(shortenUrlData)
+    //setShortCode(shortenUrlData.shortCode)
+    if(shortenUrlData) window.document.getElementById("output").value = `${domain}${shortenUrlData.shortCode}`
+  },[shortenUrlData])
+
+  useEffect(() => {
+    setLongUrl(longUrl)
+    console.log(longUrl)
+    if(longUrl.url){
+      btnLoaderDisplay(true, btnName)
+      axios.post("http://localhost:8000/shorten", longUrl)
+      .then((res) => {
+        setShortenUrlData(res.data[0])
+        setShortCode(res.data[0].shortCode)
+        btnLoaderDisplay(false, btnName)
+        disableInputArea(true, "longUrl", isCustom)
+      })
+      .catch((e) => {
+        console.log(e.message)
+        btnLoaderDisplay(false, btnName);
+      })
+    }
+  },[longUrl])
+
   return (
     <>
     <div className='side-dotted'>p</div>
@@ -25,7 +79,8 @@ function App() {
 <path d="M218.065 167.978C218.046 167.978 218.026 167.977 218.006 167.977C217.832 167.968 217.662 167.922 217.508 167.842C217.353 167.762 217.218 167.649 217.111 167.511L215.424 165.342C215.227 165.089 215.139 164.768 215.179 164.45C215.219 164.132 215.383 163.843 215.636 163.645L215.696 163.598C215.949 163.402 216.27 163.314 216.588 163.354C216.906 163.393 217.196 163.557 217.393 163.81C217.488 163.933 217.608 164.033 217.746 164.104C217.883 164.176 218.034 164.217 218.189 164.224C218.344 164.232 218.498 164.206 218.642 164.148C218.786 164.09 218.915 164.002 219.022 163.89L222.448 160.273C222.557 160.158 222.688 160.065 222.833 160C222.978 159.936 223.134 159.9 223.293 159.896C223.452 159.892 223.61 159.919 223.758 159.975C223.906 160.032 224.042 160.118 224.157 160.227L224.213 160.28C224.446 160.5 224.581 160.804 224.59 161.125C224.599 161.445 224.48 161.756 224.259 161.989L218.943 167.6C218.83 167.72 218.694 167.815 218.543 167.88C218.392 167.945 218.23 167.978 218.065 167.978Z" fill="white"/>
       </svg>
       <div className='inner-container'>
-        <Shortener />
+        <Shortener setIsCustom={setIsCustom} isCustom={isCustom} setLongUrl={setLongUrl} shortCode={shortCode} setShortenUrlData={setShortenUrlData} />
+        { isCustom && <CustomLink setIsCustom={setIsCustom} isCustom={isCustom} setLongUrl={setLongUrl} longUrl={longUrl} setShortCode={setShortCode} setShortenUrlData={setShortenUrlData} shortenUrlData={shortenUrlData} domain={domain} /> }
       </div>
     </div>
     </>

@@ -32,4 +32,19 @@ urlRouter.post("/shorten", async (req, res) => {
         res.status(400).send(e.message);
     }
 })
+
+urlRouter.patch("/shorten/:id", async(req, res) => {
+    try {
+        const _id = req.params.id;
+        const newVal = req.body;
+        const isCodePresent = await URL.find({shortCode: newVal.shortCode}); //returns an array
+        if(isCodePresent.length > 0) {
+            res.status(200).send("code already taken. Please enter another code");
+        } else {
+            const data = await URL.updateOne({_id: _id}, {$set: newVal});
+            res.status(201).send("updated successfully");
+        }
+    }
+    catch(e) {res.status(500).send(e.message)}
+});
 export default urlRouter

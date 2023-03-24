@@ -1,0 +1,34 @@
+.custom-container, .customise-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1rem;
+    width: 100%;
+    height: 100%;
+    padding: 3rem 5rem;
+}
+
+.customise-area {
+    flex-direction: row;
+    gap: 0.2rem;
+    width: 47%;
+    height: auto;
+    padding: 0rem;
+}
+
+.customise-area input {
+    width: 51%;
+}
+
+.customise-area p {
+    font-size: 1.1rem;
+}
+
+.customise-area .btn-black {
+    width: auto;
+}
+
+#btn-loader-2 {
+    display: none;
+}
