@@ -49,7 +49,7 @@ function App() {
         setShortenUrlData(res.data[0])
         setShortCode(res.data[0].shortCode)
         btnLoaderDisplay(false, btnName)
-        disableInputArea(true)
+        disableInputArea(true, "longUrl", isCustom)
       })
       .catch((e) => {
         console.log(e.message)
@@ -80,7 +80,7 @@ function App() {
       </svg>
       <div className='inner-container'>
         <Shortener setIsCustom={setIsCustom} isCustom={isCustom} setLongUrl={setLongUrl} shortCode={shortCode} setShortenUrlData={setShortenUrlData} />
-        { isCustom && <CustomLink setIsCustom={setIsCustom} setLongUrl={setLongUrl} longUrl={longUrl} setShortCode={setShortCode} setShortenUrlData={setShortenUrlData} shortenUrlData={shortenUrlData} /> }
+        { isCustom && <CustomLink setIsCustom={setIsCustom} isCustom={isCustom} setLongUrl={setLongUrl} longUrl={longUrl} setShortCode={setShortCode} setShortenUrlData={setShortenUrlData} shortenUrlData={shortenUrlData} domain={domain} /> }
       </div>
     </div>
     </>

@@ -17,7 +17,7 @@ const Shortener = ({setIsCustom, isCustom, setLongUrl, shortCode, setShortenUrlD
           <button className='btn-black' id='btn_shorten' onClick={() => shrinkIt(setLongUrl, "url-type")}>shorten</button>
           <button className='btn-black' id='btn-loader'><Icon icon="eos-icons:bubble-loading" color="white" width="1.3rem" height="1.3rem" inline={true} /></button>
         </div>
-        <Output setIsCustom={setIsCustom} />
+        <Output setIsCustom={setIsCustom} isCustom={isCustom} />
       </div>
       }
     </div>

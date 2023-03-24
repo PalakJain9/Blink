@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import './customLink.css'
 import { Icon } from '@iconify/react';
-import { inputUrl, shrinkIt } from '../../handler/inputTextHandler.js'
+import { inputUrl, shrinkIt, disableInputArea } from '../../handler/inputTextHandler.js'
 import { btnLoaderDisplay } from '../../handler/buttonDisplay.js';
 import axios from 'axios';
 import Output from '../output/Output';
 
-const CustomLink = ({setIsCustom, setLongUrl, longUrl, setShortCode, setShortenUrlData, shortenUrlData}) => {
+const CustomLink = ({setIsCustom, isCustom, setLongUrl, longUrl, setShortCode, setShortenUrlData, shortenUrlData, domain}) => {
   const [customCode, setCustomCode] = useState("")
   
   useEffect(() => {
@@ -19,6 +19,8 @@ const CustomLink = ({setIsCustom, setLongUrl, longUrl, setShortCode, setShortenU
       if(customCode == shortenUrlData.shortCode){
         //same code entered
         window.alert("updated successfully")
+        disableInputArea(true, "customUrl", isCustom)
+        window.document.getElementById("output").value = `${domain}${customCode}`
       }
       else {
         btnLoaderDisplay(true, "btn-shorten-2")
@@ -26,10 +28,9 @@ const CustomLink = ({setIsCustom, setLongUrl, longUrl, setShortCode, setShortenU
         .then((res) => {
           //setShortenUrlData(res.data[0])
           btnLoaderDisplay(false, "btn-shorten-2");
-          // disableInputArea(true)
           window.alert(res.data)
-          // setShortenUrlData(res.data[0])
-          // setShortCode(res.data[0].shortCode)
+          disableInputArea(true, "customUrl", isCustom)
+          window.document.getElementById("output").value = `${domain}${customCode}`
         })
         .catch((e) => {
           console.log(e.message)
@@ -49,7 +50,7 @@ const CustomLink = ({setIsCustom, setLongUrl, longUrl, setShortCode, setShortenU
           <button className='btn-black' id='btn-loader-2'><Icon icon="eos-icons:bubble-loading" color="white" width="1.3rem" height="1.3rem" inline={true} /></button>
           <button className='btn-black' onClick={() => setIsCustom(false)}>back</button>
         </div>
-        <Output />
+        <Output setIsCustom={setIsCustom} isCustom={isCustom} />
       </div>
     </>
   )
