@@ -82,6 +82,7 @@ function App() {
         <Shortener setIsCustom={setIsCustom} isCustom={isCustom} setLongUrl={setLongUrl} shortCode={shortCode} setShortenUrlData={setShortenUrlData} />
         { isCustom && <CustomLink setIsCustom={setIsCustom} isCustom={isCustom} setLongUrl={setLongUrl} longUrl={longUrl} setShortCode={setShortCode} setShortenUrlData={setShortenUrlData} shortenUrlData={shortenUrlData} domain={domain} /> }
       </div>
+      <p id='footer-msg'>Built with <span>❤</span></p>
     </div>
     </>
   )
