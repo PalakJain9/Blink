@@ -26,6 +26,30 @@ body {
   min-height: 100vh;
 }
 
+@media only screen and (max-width: 600px) {
+  html {
+    font-size: 56%;
+  }
+  #bg {
+    top: 41% !important;
+    width: 200px;
+    height: 130px;
+  }
+  .container {
+    padding-top: 2rem !important;
+    gap: 25rem !important;
+  }
+  .heading {
+    width: 80% !important;
+  }
+  .input-area {
+    width: 90%;
+  }
+  .input-area .btn-black {
+    width: 21%;
+  }
+}
+
 /* button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -57,3 +81,15 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 } */
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+/* @media only screen and (min-width: 600px) {...} */
+
+/* Medium devices (landscape tablets, 768px and up) */
+/* @media only screen and (min-width: 768px) {...} */
+
+/* Large devices (laptops/desktops, 992px and up) */
+/* @media only screen and (min-width: 992px) {...} */
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+/* @media only screen and (min-width: 1200px) {...}  */
