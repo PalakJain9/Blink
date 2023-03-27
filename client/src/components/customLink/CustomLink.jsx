@@ -4,7 +4,7 @@ import { Icon } from '@iconify/react';
 import { inputUrl, shrinkIt, disableInputArea } from '../../handler/inputTextHandler.js'
 import { btnLoaderDisplay } from '../../handler/buttonDisplay.js';
 import axios from 'axios';
-import Output from '../output/Output';
+import Output from '../output/Output.jsx';
 
 const CustomLink = ({setIsCustom, isCustom, setLongUrl, longUrl, setShortCode, setShortenUrlData, shortenUrlData, domain}) => {
   const [customCode, setCustomCode] = useState("")
@@ -24,7 +24,7 @@ const CustomLink = ({setIsCustom, isCustom, setLongUrl, longUrl, setShortCode, s
       }
       else {
         btnLoaderDisplay(true, "btn-shorten-2")
-        axios.patch(`http://localhost:8000/shorten/${shortenUrlData._id}`, updatedObj)
+        axios.patch(`/shorten/${shortenUrlData._id}`, updatedObj)
         .then((res) => {
           //setShortenUrlData(res.data[0])
           btnLoaderDisplay(false, "btn-shorten-2");

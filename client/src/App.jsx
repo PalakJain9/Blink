@@ -44,7 +44,7 @@ function App() {
     console.log(longUrl)
     if(longUrl.url){
       btnLoaderDisplay(true, btnName)
-      axios.post("http://localhost:8000/shorten", longUrl)
+      axios.post("/shorten", longUrl)
       .then((res) => {
         setShortenUrlData(res.data[0])
         setShortCode(res.data[0].shortCode)

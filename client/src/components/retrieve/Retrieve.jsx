@@ -13,7 +13,7 @@ const Retrieve = () => {
     console.log(retrieveUrl)
   },[retrieveUrl])
 
-    axios.get(`http://localhost:8000/shorten/${param.shortCode}`)
+    axios.get(`/shorten/${param.shortCode}`)
     .then((res) => {
       setRetrieveUrl(res.data)
       window.location.href=retrieveUrl
